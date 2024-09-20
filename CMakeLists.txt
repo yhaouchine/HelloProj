@@ -20,3 +20,37 @@ if(HELLOWORLD_WITH_EXECUTABLES)
 	message(STATUS "Configuring Hello World with executables")
 	add_subdirectory(mains)
 endif()
+
+#add tests
+option(HELLOWORD_WITH_TESTS "Compile tests" ON)
+if(HELLOWORD_WITH_TESTS)
+	enable_testing()
+	message(STATUS "Configuring Hello World with tests")
+	add_subdirectory(tests)
+endif()
+
+
+
+# create the package configuration file
+include(CMakePackageConfigHelpers) 
+configure_package_config_file(
+	cmake/HelloProjConfig.cmake.in 			#on prend ce fichier
+	HelloProjConfig.cmake 					#on crée ce fichier
+	INSTALL_DESTINATION cmake/				#à cet emplacement
+)
+
+#install project configuration file
+install(
+	FILES ${PROJECT_BINARY_DIR}/HelloProjConfig.cmake
+	DESTINATION cmake/
+	)
+	
+# Configure CPack
+if(WIN32)
+	set(CPACK_GENERATOR "ZIP")
+else()
+	set(CPACK_GENERATOR "TGZ")
+endif()
+
+# This must always be last!
+include(CPack)
