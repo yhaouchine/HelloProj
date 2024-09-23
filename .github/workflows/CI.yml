@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ["Add_CI"]
+    branches: ["master"]
 
 env: 
   BUILD_TYPE: Release
@@ -19,3 +19,13 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
           cmake --build . --config ${{env.BUILD_TYPE}}
           ctest -C ${{env.BUILD_TYPE}}
+      
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 16
+          # you can set branches for semantic-release above v16.
+          branches: "master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
