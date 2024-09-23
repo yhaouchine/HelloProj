@@ -9,18 +9,16 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-
   format:
-    uses: Geode-solutions/actions/.github/workflows/format.yml@master
-    secrets:
-      TOKEN: ${{ secrets.TOKEN }}
-      
-    build:
-      runs-on: ubuntu-latest
-      needs: [format]
-      
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Geode-solutions/actions/.github/workflows/format.yml@master
+        secrets:
+          TOKEN: ${{ secrets.TOKEN }}
+
   build:
     runs-on: ubuntu-latest
+    needs: [format]
     steps:
       - uses: actions/checkout@v4
       - name: Configure CMake
@@ -42,4 +40,3 @@ jobs:
         uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-  
