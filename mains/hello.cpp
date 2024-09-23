@@ -1,6 +1,7 @@
 #include <basic/message.h>
 
-int main(){
-	hello_world();
-	print_version();
+int main()
+{
+    hello_world();
+    print_version();
 }
