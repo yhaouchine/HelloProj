@@ -27,5 +27,5 @@ jobs:
           # you can set branches for semantic-release above v16.
           branches: "master"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          NPM_TOKEN: ${{ secrets.TOKEN }}
