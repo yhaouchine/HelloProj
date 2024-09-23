@@ -2,6 +2,7 @@ name: CI
 
 on:
 <<<<<<< HEAD
+<<<<<<< HEAD
   push:
     branches: ["master"]
 
@@ -24,11 +25,17 @@ jobs:
  push:
   branches: ["Add_CI"]
   
+=======
+  push:
+    branches: ["master"]
+
+>>>>>>> bff9ecde8e13e5abcfc337d46ce949e1cc332f0f
 env: 
   BUILD_TYPE: Release
-  
+
 jobs:
   build:
+<<<<<<< HEAD
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v4
@@ -40,3 +47,24 @@ jobs:
       cmake --build . --config ${{env.BUILD_TYPE}}
       ctest -C ${{env.BUILD_TYPE}}
 >>>>>>> a9f924a6b0a763c9853bb234aee22d24e3fc90f2
+=======
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
+          cmake --build . --config ${{env.BUILD_TYPE}}
+          ctest -C ${{env.BUILD_TYPE}}
+      
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 16
+          # you can set branches for semantic-release above v16.
+          branches: "master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+>>>>>>> bff9ecde8e13e5abcfc337d46ce949e1cc332f0f
