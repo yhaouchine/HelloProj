@@ -1,6 +1,7 @@
 name: CI
 
 on:
+<<<<<<< HEAD
   push:
     branches: ["master"]
 
@@ -19,3 +20,23 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ..
           cmake --build . --config ${{env.BUILD_TYPE}}
           ctest -C ${{env.BUILD_TYPE}}
+=======
+ push:
+  branches: ["Add_CI"]
+  
+env: 
+  BUILD_TYPE: Release
+  
+jobs:
+  build:
+   runs-on: ubuntu-latest
+   steps:
+   - uses: actions/checkout@v4
+   - name: Configure Cmake
+     run: |
+      mkdir build
+      cd build
+      cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}..
+      cmake --build . --config ${{env.BUILD_TYPE}}
+      ctest -C ${{env.BUILD_TYPE}}
+>>>>>>> a9f924a6b0a763c9853bb234aee22d24e3fc90f2
