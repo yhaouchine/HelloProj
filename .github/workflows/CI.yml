@@ -10,11 +10,9 @@ env:
 
 jobs:
   format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: Geode-solutions/actions/.github/workflows/format.yml@master
-        secrets:
-          TOKEN: ${{ secrets.TOKEN }}
+   uses: Geode-solutions/actions/.github/workflows/format.yml@master
+   secrets:
+      TOKEN: ${{ secrets.TOKEN }}
 
   build:
     runs-on: ubuntu-latest
